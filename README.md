@@ -6,7 +6,7 @@
 npm i
 ```
 
-*** Set your DB_HOST, DB_PORT and DB_NAME in the .env file! ***
+**Set your DB_HOST, DB_PORT and DB_NAME in the .env file!!!**
 
 ```
 npm run dev
@@ -181,6 +181,33 @@ Example of response:
 ```
 {
     "message": "User was logged out!"
+}
+```
+
+### Get protected resource
+Endpoint:
+```
+GET http://0.0.0.0:5000/api/user/get-protected-resource
+```
+
+Request body format: JSON
+
+Add request header **Authorization** with value:
+
+```
+Bearer insert_access_token
+```
+
+For example:
+
+```
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGQ2Nzc3NTk0MmQxYjdjNWRkY2JiZTkiLCJpYXQiOjE2OTE3Nzg3NTQsImV4cCI6MTY5MTc4MDU1NH0.HcchzIcDPblOOd5CEt7IiBVy4g2TQshXVgFoWQYpWl4
+```
+
+Example of response:
+```
+{
+    "message": "User with id 64d682e4ea1f34db9c09b7e0 got protected resource"
 }
 ```
 
@@ -395,6 +422,41 @@ Example of response:
     "data": {
         "logout": {
             "message": "User was logged out!"
+        }
+    }
+}
+```
+
+### Get protected resource
+
+Example of the query:
+
+Add request header **Authorization** with value:
+
+```
+Bearer insert_access_token
+```
+
+For example:
+
+```
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGQ2ODJlNGVhMWYzNGRiOWMwOWI3ZTAiLCJpYXQiOjE2OTE3ODAxOTMsImV4cCI6MTY5MTc4MTk5M30.foMWM90fe3KHB9RzP-3XYGjm7jDjhHGXRRDK0qS26qs
+```
+
+```
+query GetProtectedResource {
+  get_protected_resource {
+    message
+  }
+}
+```
+
+Example of response:
+```
+{
+    "data": {
+        "get_protected_resource": {
+            "message": "User with id 64d682e4ea1f34db9c09b7e0 got protected resource"
         }
     }
 }

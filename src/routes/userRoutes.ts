@@ -1,6 +1,6 @@
 import express from 'express';
 
-import authController from '../controllers/userController';
+import authController from '../controllers/rest/userController';
 import authMiddleware from '../middleware/authMiddleware'; // middleware for checking authentification 
 
 import { body } from 'express-validator';
@@ -21,5 +21,7 @@ router.post('/logout', authController.logout);
 router.get('/refresh', authMiddleware, authController.refresh);
 // route for updating a password
 router.post('/update', authMiddleware, authController.update);
+// get protected resource
+router.get('/get-protected-resource', authMiddleware, authController.get_protected_resource);
 
 export default router;

@@ -11,6 +11,7 @@ export const schema = `#graphql
   type Query {
     logout: Message!
     refresh: TokenData!
+    get_protected_resource: Message!
   }
 
   input UserInput {

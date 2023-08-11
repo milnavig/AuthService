@@ -4,9 +4,9 @@ import qrcode from 'qrcode';
 import speakeasy from 'speakeasy';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import { validationResult } from 'express-validator';
-import User from '../models/User';
-import jwtUtils from '../utils/jwtUtils';
-import APIError from '../error/APIError';
+import User from '../../models/User';
+import jwtUtils from '../../utils/jwtUtils';
+import APIError from '../../error/APIError';
 
 // controller for User
 class UserController {
@@ -275,7 +275,16 @@ class UserController {
   }
 
   async get_protected_resource(req: Request, res: Response, next: NextFunction) { 
+    try {
+      const user_id = req.user?.userId;
 
+      return res.status(200).json({ message: `User with id ${user_id} got protected resource` });
+    } catch (error) {
+      if (error instanceof Error) {
+        // Handle the error
+        return next(APIError.internal(error.message));
+      }
+    }
   }
 }
 
