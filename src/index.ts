@@ -34,6 +34,7 @@ app.use(cookieParser());
 // mount the authRoutes
 app.use('/api/user', userRoutes);
 
+// function which starts Express server
 const startExpressServer = () => {
   try {
     app.listen(PORT, () => console.log('The server was launched!'));
@@ -42,6 +43,7 @@ const startExpressServer = () => {
   }
 }
 
+// function which starts ApolloServer
 const startApolloServer = async () => {
   const server = new ApolloServer<IContext>({
     typeDefs: schema,

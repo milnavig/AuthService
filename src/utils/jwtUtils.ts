@@ -1,6 +1,7 @@
 import jwt, { Secret } from 'jsonwebtoken';
 import Token, { IToken } from '../models/Token';
 
+// generates JWT tokens
 const generate_jwt = (userId: string) => {
   const SECRET_KEY = process.env.SECRET_KEY as Secret;
   const REFRESH_SECRET_KEY = process.env.REFRESH_SECRET_KEY as Secret;
@@ -18,6 +19,7 @@ const generate_jwt = (userId: string) => {
   return { access_token, refresh_token }
 }
 
+// save JWT token to DB
 async function save_token(userId: string, refreshToken: string, expirationDate: Date) {
   const tokenData: IToken | null = await Token.findOne({ userId });
   if (tokenData) {
@@ -29,12 +31,14 @@ async function save_token(userId: string, refreshToken: string, expirationDate: 
   return token;
 }
 
+// get JWT token from db
 async function get_token(refreshToken: string): Promise<IToken | null> {
   const tokenData: IToken | null = await Token.findOne({ refreshToken });
 
   return tokenData;
 }
 
+// delete toke from DB
 async function delete_token(refreshToken: string) {
   await Token.deleteOne({refreshToken});
 }

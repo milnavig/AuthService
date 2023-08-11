@@ -1,3 +1,5 @@
+// middleware for checking authentification 
+
 import { Request, Response, NextFunction } from 'express';
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import APIError from '../error/APIError';

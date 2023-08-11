@@ -1,3 +1,5 @@
+// middleware for handling errors
+
 import { Request, Response, NextFunction } from 'express';
 import APIError from './../error/APIError';
 
